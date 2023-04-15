@@ -1,12 +1,12 @@
 const { request, response } = require('express');
 const db = require('../models/rf/index');
 
-const Cliente = db.cliente;
+const Locales = db.local;
 
-const getClientes = async (req = request, res = response) => {
+const getLocales = async (req = request, res = response) => {
     try {
-        const clientes = await Cliente.findAll();
-        return res.status(200).json({ Clientes: clientes });
+        const locales = await Locales.findAll();
+        return res.status(200).json({ Locales: locales });
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -14,15 +14,14 @@ const getClientes = async (req = request, res = response) => {
         })
     }
 };
-
-const getClientesActivos = async (req = request, res = response) => {
+const getLocalesActivos = async (req = request, res = response) => {
     try {
-        const clientes = await Cliente.findAll({
+        const locales = await Locales.findAll({
             where: {
                 activo: 1
             }
         })
-        return res.status(200).json({ Clientes: clientes });
+        return res.status(200).json({ Locales: locales });
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -31,21 +30,17 @@ const getClientesActivos = async (req = request, res = response) => {
     }
 };
 
-
-const crearCliente = async (req = request, res = response) => {
-
-    const { nombre, numerocelular, identidad } = req.body;
+const postLocal = async (req = request, res) => {
+    const { nombreLocal } = req.body
     try {
-        const cliente = await Cliente.create({
-            nombre: nombre,
-            numerocelular: numerocelular,
-            identidad: identidad,
-
+        const locales = await Locales.create({
+            nombreLocal: nombreLocal,
+            activo: true
         });
 
         return res.status(200).send({
             message: "Registrado con éxito.",
-            cliente
+            locales
         });
     } catch (error) {
         console.log(error);
@@ -55,23 +50,21 @@ const crearCliente = async (req = request, res = response) => {
     }
 }
 
-const putCliente = async (req = request, res) => {
-    const { idCliente, nombre, numerocelular, identidad, activo } = req.body
+const putLocal = async (req = request, res) => {
+    const { nombreLocal, activo, id } = req.body
     try {
-        const cliente = await Cliente.update({
-            nombre: nombre,
-            numerocelular: numerocelular,
-            identidad: identidad,
-            activo: activo,
+        const locales = await Locales.update({
+            nombreLocal: nombreLocal,
+            activo: activo
         }, {
             where: {
-                idCliente: idCliente
+                idLocal: id
             }
         });
 
         return res.status(200).send({
             message: "Actualizado con éxito.",
-            cliente
+            locales
         });
     } catch (error) {
         console.log(error);
@@ -81,13 +74,10 @@ const putCliente = async (req = request, res) => {
     }
 }
 
-
-
-
 module.exports = {
-    getClientes,
-    getClientesActivos,
-    crearCliente,
-    putCliente,
+    getLocales,
+    getLocalesActivos,
+    postLocal,
+    putLocal
 
 }

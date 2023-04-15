@@ -7,12 +7,15 @@ class Server {
 
     constructor() {
         this.app = express();
+        process.env.TZ = 'America/Tegucigalpa';
         this.port = process.env.PORT || 3000;
         this.usuariosRoutePath = '/api/usuario';
         this.rutaAuth = '/api/auth';
         this.rutaCliente = '/api/cliente';
         this.rutaServicio = '/api/servicio';
-        this.rutaSesion = '/api/sesion';
+        this.rutaCategoria = '/api/categoria';
+        this.rutaPaquete = '/api/paquete';
+        this.rutaLocales = '/api/locales';
 
         this.middlewares();
         this.routes();
@@ -53,11 +56,13 @@ class Server {
     // Endpoints 
     routes() {
         // Ruta de usuarios api
-        this.app.use(this.usuariosRoutePath, require('./routes/usuario.route'));
+        this.app.use(this.usuariosRoutePath, require('./routes/usuario.routes'));
         this.app.use(this.rutaAuth, require('./routes/auth.routes'));
-        this.app.use(this.rutaCliente, require('./routes/clientes.route'));
-        this.app.use(this.rutaServicio, require('./routes/servicio.route'));
-        this.app.use(this.rutaSesion, require('./routes/sesion.route'));
+        this.app.use(this.rutaCliente, require('./routes/clientes.routes'));
+        this.app.use(this.rutaServicio, require('./routes/servicio.routes'));
+        this.app.use(this.rutaCategoria, require('./routes/categoria.routes'));
+        this.app.use(this.rutaPaquete, require('./routes/paquete.routes'));
+        this.app.use(this.rutaLocales, require('./routes/locales.routes'));
 
     }
 

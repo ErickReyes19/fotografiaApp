@@ -1,23 +1,25 @@
 const { DataTypes } = require('sequelize');
 const dbConection = require('../database/config');
 
-const Evento = dbConection.define("Evento", {
-    idEvento: {
+const Local = dbConection.define("local", {
+    idLocal: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    tipoEvento: {
+    nombreLocal: {
         type: DataTypes.STRING,
         allowNull: false
     },
+
     activo: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     }
 }, {
+},{
     timestamps: false,
     freezeTableName: true
 });
 
-module.exports = Evento;
+module.exports = Local;

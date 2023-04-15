@@ -11,6 +11,7 @@ const Servicio = dbConection.define("servicios", {
         type: DataTypes.STRING,
         allowNull: false
     },
+
     activo: {
         type: DataTypes.BOOLEAN,
         defaultValue: true

@@ -1,13 +1,17 @@
 const { DataTypes } = require('sequelize');
 const dbConection = require('../database/config');
 
-const Empresa = dbConection.define("empresa", {
-    idEmpresa: {
+const Categoria = dbConection.define("categoria", {
+    idCategoria: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    tipoEmpresa: {
+    idServicio: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    tipoCategoria: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -15,9 +19,10 @@ const Empresa = dbConection.define("empresa", {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     }
+
 }, {
     timestamps: false,
     freezeTableName: true
 });
 
-module.exports = Empresa;
+module.exports = Categoria;

@@ -2,7 +2,7 @@
 
 const { Router } = require('express');
 
-const { getClientes, crearCliente } = require('../controllers/clientes.controller');
+const { getClientes, crearCliente, putCliente, getClientesActivos } = require('../controllers/clientes.controller');
 const { validarCampos } = require('../middlewares/validarcampos.middleware');
 const { validarJWT } = require('../middlewares/validarJWT.middleware');
 
@@ -11,7 +11,8 @@ const router = Router();
 router.get('/',validarJWT, getClientes);
 
 router.post('/',validarJWT, crearCliente);
+router.put('/',validarJWT, putCliente);
 
-// router.get('/', validarJWT, getUsuario);
+router.get('/activos', validarJWT, getClientesActivos);
 
 module.exports = router;

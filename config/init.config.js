@@ -2,14 +2,15 @@ const db = require("../models/rf/index");
 const { DB } = require("../database/config");
 const bcrypt = require("bcrypt");
 const config = require("../config/auth.config.js");
+const moment = require('moment');
 
 const Usuario = db.usuario;
 const Cliente = db.cliente;
 const Servicio = db.servicio;
-const Sesion = db.sesion;
-const Evento = db.evento;
-const Empresa = db.empresa;
+const categoria = db.categoria;
 const Cobertura = db.cobertura;
+const Paquete = db.paquete;
+const Local = db.local;
 
 exports.initial = async () => {
     try {
@@ -51,40 +52,67 @@ exports.initial = async () => {
             tipoServicio: "Sesion",
         });
         await Servicio.create({
+            tipoServicio: "Video",
+        });
+        await Servicio.create({
             tipoServicio: "Empresa",
         });
-        await Sesion.create({
-            tipoSesion: "Pre-15",
+
+        await categoria.create({
+            tipoCategoria: "Boda",
+            idServicio: "1"
+
         });
-        await Sesion.create({
-            tipoSesion: "Pre-boda",
+        await categoria.create({
+            tipoCategoria: "Boda",
+            idServicio: "1"
+
         });
-        await Evento.create({
-            tipoEvento: "15",
+        await categoria.create({
+            tipoCategoria: "Boda",
+            idServicio: "1"
+
         });
-        await Evento.create({
-            tipoEvento: "boda",
+        await categoria.create({
+            tipoCategoria: "Moda",
+            idServicio: "2"
+
         });
-        await Empresa.create({
-            tipoEmpresa: "Restaurante",
+
+        await Local.create({
+            nombreLocal: "Salon",
+            
+
         });
-        await Empresa.create({
-            tipoEmpresa: "Moda",
+
+        await Paquete.create({
+            nombrePaquete: "Paquete Basico",
+            catidadFotosDigitales: 15,
+            fotosImpresas: 1,
+            cantFotosImpresas: 5,
+            tiempoCobertura: "2023-04-15 02:00:00",
+            precio: 1200
+            
         });
+
+
+
         await Cobertura.create({
             idServicio: 1,
-            idEvento: null,
-            idSesion: null,
+            idCategoria: 1,
             lugar: "Salón principal",
             fecha: new Date("2023-04-10"),
             idCliente: 1,
-            area: null,
+            idLocal: 1,
+            horasExtras: true,
+            canthorasExtras: "1:00",
+            idUsuario: 1,
             horaInicio: "10:00",
             horaFinal: "12:00",
-            idPaquete: null,
+            idPaquete: 1,
             cantHoras: 2
         });
-        
+
 
 
     } catch (error) {

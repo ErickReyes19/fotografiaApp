@@ -7,15 +7,27 @@ const Cobertura = dbConnection.define('cobertura', {
     autoIncrement: true,
     primaryKey: true
   },
+  idCliente: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   idServicio: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  idEvento: {
+  idCategoria: {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  idSesion: {
+  idUsuario: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  idPaquete: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
+  idLocal: {
     type: DataTypes.INTEGER,
     allowNull: true
   },
@@ -23,18 +35,21 @@ const Cobertura = dbConnection.define('cobertura', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  horasExtras: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  canthorasExtras: {
+    type: DataTypes.TIME,
+    allowNull: true
+  },
+  
   fecha: {
     type: DataTypes.DATEONLY,
     allowNull: false
   },
-  idCliente: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  area: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
+
+
   horaInicio: {
     type: DataTypes.TIME,
     allowNull: false
@@ -43,10 +58,7 @@ const Cobertura = dbConnection.define('cobertura', {
     type: DataTypes.TIME,
     allowNull: false
   },
-  idPaquete: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
+
   cantHoras: {
     type: DataTypes.INTEGER,
     allowNull: false
