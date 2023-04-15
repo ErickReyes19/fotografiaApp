@@ -5,11 +5,11 @@ const  dbConection = new Sequelize(
   process.env.DB_USER,
   process.env.DB_PWD,
   {
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PWD,
-    port: process.env.DB_PORT,
+    database: process.env.DB_NAME || 'rf',
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PWD || '',
+    port: process.env.DB_PORT || '3306',
     dialect: "mysql",
   });
 
